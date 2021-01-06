@@ -1,0 +1,15 @@
+	public int[] solution2(int[] A, int[] B) {
+        int l = A.length;
+        int k[] = new int[l+1]; 
+        k[0] = 1;
+        k[1] = 1;
+        
+        for (int i=2; i<len+1; i++){
+            k[i] = (k[i-1] + k[i-2]) % (1 << 30);
+        }
+        int D[] = new int[l];
+        for (int i=0; i<l; i++){    
+            D[i] = k[A[i]] % (1 << B[i]);
+        }  
+        return D;
+    }
