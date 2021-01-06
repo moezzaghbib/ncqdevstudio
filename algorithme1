@@ -1,0 +1,21 @@
+ public int[] solution(int N, int[] A) {
+	        int k[] = new int[N];
+	        int l = A.length;
+	        int max=-1;
+	        int min=0;
+
+	        for(int i=0; i<l; i++){
+	            if(A[i]>=1 && A[i]<= N){
+	                if(k[A[i] - 1] < min) k[A[i] - 1] = min;
+	                k[A[i] - 1] = C[A[i] - 1] + 1;
+	                if(k[A[i] - 1] > max) max = k[A[i] - 1];
+	            }
+	            else if(A[i] == N+1){
+	                min = max;
+	            }
+	        }
+	        for(int i=0; i<N; i++){
+	            if(k[i] < min) C[i] =  min;
+	        }
+	        return k;
+	    }
