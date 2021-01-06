@@ -1,0 +1,34 @@
+public int solution3(int[] A) {
+    int sum = 0;
+    int len = A.length;
+    if (len == 0) return 0;
+    if (len == 1) return A[0];
+    for (int i=0; i<len; i++){
+        sum += Math.abs(A[i]);
+    }
+    int[] N = new int[len];
+    N[0] = 0;
+    int half = sum/2;
+    int S = Math.abs(A[0]);
+    int min = Integer.MAX_VALUE;
+    int j = 1;
+    for (int i=1; i<len; i++){
+        if (S<half){
+            if (Math.abs(2*min-sum) > Math.abs(2*S - sum))
+                min = S;
+            S += Math.abs(A[i]);
+            N[j++] = i;
+        }else{
+            if (S == half)
+                return Math.abs(2*half - sum);
+
+            if (Math.abs(2*min-sum) > Math.abs(2*S - sum))
+                min = S;
+            if (j > 1) {
+                S -= Math.abs(A[N[j--]]);
+                i = N[j];
+            }
+        }
+    }
+    return (Math.abs(2*min - sum));
+}
